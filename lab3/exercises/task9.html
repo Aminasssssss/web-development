@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Скрипты - Все в одном</title>
+    <style>
+        body{
+            font-family: Arial;
+            margin: 20px;
+
+        }
+        .box{
+            width:100px;
+            height:100px;
+            background:blue;
+            margin:10px;
+
+        }
+        button{
+            margin:5px;
+            padding:10px;
+
+        }
+        input{
+            margin:5px;
+            padding:10px;
+
+        }
+        ul{
+            list-style:none;
+            padding:0;
+
+        }
+        li{
+            background: #eee;
+            padding: 10px;
+            margin: 5px;
+        }
+        .hidden { display: none; }
+    </style>
+
+</head>
+<body>
+<h2>Менеджер задач</h2>
+<label>
+<input type="text" id="taskInput" placeholder="Новая задача">
+</label>
+<button id="addBtn"> Add</button>
+<ul id="taskList"></ul>
+
+<h2>Счетчик</h2>
+<button id="minusBtn">-</button>
+<span id="counter">0</span>
+<button id="plusBtn">+</button>
+
+<h2>Изменение цвета</h2>
+<label>
+<input type="color" id ="colorPicker" value="#3490db">
+
+</label>
+<div class="box" id="colorBox"></div>
+
+<h2>Show/hide</h2>
+<button id="toggleBtn">Переключить</button>
+<div class="box" id="toggleBox"></div>
+
+<h2>Изменение текста</h2>
+<button id="changeTextBtn">изменить заголовок</button>
+
+<h2>Timer</h2>
+<button id="startTimer">Start</button>
+<span id="timer">10</span>
+
+
+<h2>Slider</h2>
+<label>
+    <input type="range" id="slider" min="0" max="100" value="50">
+</label>
+<span id="sliderValue">50</span>
+
+<h2>Title</h2>
+<button id="themeBtn">Title</button>
+<script>
+
+
+    //1 problem
+    const taskInput=document.getElementById('taskInput');
+    const addBtn=document.getElementById('addBtn');
+    const taskList= document.getElementById('taskList');
+
+
+    addBtn.addEventListener('click', ()=>{
+        const text= taskInput.value.trim();
+        if(!text) {
+            alert('enter your task');
+            return;
+        }
+        const li= document.createElement('li');
+        li.textContent=text;
+        taskList.appendChild(li);
+        taskInput.value='';
+
+    });
+
+    //2
+    let count=0;
+    const counter= document.getElementById('counter');
+    const minusBtn=document.getElementById('minusBtn');
+    const plusBtn=document.getElementById('plusBtn');
+
+    minusBtn.addEventListener('click', ()=>{
+        count--;
+        counter.innerHTML=count;
+
+    });
+
+
+    plusBtn.addEventListener('click', ()=>{
+        count++;
+        counter.innerHTML=count;
+
+    });
+
+
+    //3
+    const colorPicker= document.getElementById('colorPicker');
+    const colorBox=document.getElementById('colorBox');
+
+
+    colorPicker.addEventListener('click', (e)=>{
+        colorBox.style.backgroundColor=e.target.value;
+
+
+    });
+    //4
+    const toggleBtn=document.getElementById('toggleBtn');
+    const toggleBox= document.getElementById('toggleBox');
+
+    toggleBtn.addEventListener('click', ()=>{
+        if(toggleBox.style.display==='none'){
+            toggleBox.style.display='block';
+
+        }
+        else{
+            toggleBox.style.display='none';
+        }
+    });
+    //5
+    const changeTextBtn= document.getElementById('changeTextBtn');
+    changeTextBtn.addEventListener('click',()=>{
+        document.querySelector('h1').textContent='text has been changed';
+
+
+
+    });
+    //6
+    const startTimer=document.getElementById('startTimer');
+    const timer= document.getElementById('timer');
+
+    startTimer.addEventListener('click', ()=>{
+        let time=10;
+        timer.textContent=time;
+
+
+        const interval=setInterval(()=>{
+            time--;
+            timer.textContent=time;
+
+            if(time<=0){
+                clearInterval(interval);
+                alert('time is out');
+            }
+        }, 1000);
+    });
+    //7
+    const slider=document.getElementById('slider');
+    const sliderValue=document.getElementById('sliderValue');
+
+    slider.addEventListener('input', (e)=>{
+        sliderValue.textContent=e.target.value;
+
+    });
+    //8
+    const themeBtn=document.getElementById('themeBtn');
+
+    themeBtn.addEventListener('click', ()=>{
+        document.body.classList.toggle('dark-theme');
+
+        if(document.body.classList.contains('dark-theme')){
+            document.body.style.backgroundColor='#333';
+            document.body.style.color='white';
+            themeBtn.textContent='светлая тема';
+
+        }
+        else{
+            document.body.style.backgroundColor='white';
+            document.body.style.color='black';
+            themeBtn.textContent='темная тема';
+        }
+    });
+
+
+
+
+
+</script>
+</body>

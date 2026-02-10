@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Счётчик символов</title>
+</head>
+<body>
+<h3>Введите текст (макс. 20 символов):</h3>
+<input type="text" id="text" placeholder="Пишите здесь...">
+<div>Символов: <span id="charCount">0</span>/20</div>
+
+<script>
+    let text = document.querySelector('#text');
+    let charCount = document.querySelector('#charCount');
+
+    text.addEventListener('input', function() {
+        let curCount = this.value.length;
+
+        if(curCount <= 20){
+            charCount.textContent = curCount;
+        } else {
+            this.value = this.value.substring(0, 20);
+        }
+    });
+</script>
+</body>
+</html>
