@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Функции и массивы</title>
+</head>
+<body>
+<button onclick="start()">Запустить код</button>
+<div id="result"></div>
+
+<script>
+    function start() {
+        let result = document.getElementById('result');
+        result.innerHTML = ''; // очищаем
+
+        // 1. Функция separator
+        function separator(n, option=1) {
+            let line = '';
+            for(let i = 0; i < n; i++) {
+                line += '-';
+            }
+            result.innerHTML += `Option ${option}: ${line}<br>`;
+        }
+
+        // 2. Массив
+        let arr = [1, 2.4, 'hello', true];
+        arr.push(100);    // добавить в конец
+        arr.pop();        // удалить последний
+        arr.unshift('first'); // добавить в начало
+
+        result.innerHTML += `Массив: ${arr}<br><br>`;
+
+        // 3. 5 способов перебора
+        separator(20, 1);
+        for(let i = 0; i < arr.length; i++) {
+            result.innerHTML += `arr[${i}] = ${arr[i]}<br>`;
+        }
+
+        separator(20, 2);
+        for(let index in arr) {
+            result.innerHTML += `arr[${index}] = ${arr[index]}<br>`;
+        }
+
+        separator(20, 3);
+        for(let elm of arr) {
+            result.innerHTML += `Элемент: ${elm}<br>`;
+        }
+
+        separator(20, 4);
+        arr.forEach(function(elm, index) {
+            result.innerHTML += `Index: ${index}, Element: ${elm}<br>`;
+        });
+
+        separator(20, 5);
+        function showElement(elm, index) {
+            result.innerHTML += `Index: ${index}, Element: ${elm}<br>`;
+        }
+        arr.forEach(showElement);
+        separator(20, 6);
+        function showItem(item, index){ // named function
+            console.log(`Index ${index}: ${item}`);
+        }
+        arr.forEach(showElement);
+
+    }
+</script>
+
+</body>
+</html>
